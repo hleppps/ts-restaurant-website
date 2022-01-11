@@ -1,0 +1,49 @@
+@import "../../../theme/index.scss";
+
+.ordersList {
+  height: 85%;
+  padding: 1% 0;
+  margin: 5% 0;
+  overflow-y: scroll;
+
+  /* Width */
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #888;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #f1f1f1;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
+
+.total {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-content: center;
+
+  & * {
+    align-self: center;
+    margin: 3% 0;
+  }
+
+  & *:nth-child(2n) {
+    justify-self: end;
+  }
+
+  & *:nth-child(2n + 1) {
+    font-size: 0.9rem;
+
+    color: $light-grey;
+  }
+}

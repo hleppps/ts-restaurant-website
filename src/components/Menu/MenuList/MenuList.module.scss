@@ -1,0 +1,19 @@
+.mealsList {
+  list-style-type: none;
+  margin: 0;
+
+  display: flex;
+  justify-content: space-between;
+
+  &::after {
+    content: "";
+    flex: auto;
+  }
+}
+
+.mealsListColumn {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+  padding: 0;
+}

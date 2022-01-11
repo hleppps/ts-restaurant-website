@@ -1,0 +1,42 @@
+@import "../../theme/index.scss";
+
+.navItem {
+  margin-left: 0.5rem;
+  padding: 0;
+
+  & .inner {
+    padding: 1rem 1rem 1rem 0.5rem;
+    border-radius: $br-main 0 0 $br-main;
+
+    & button {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  & .outer {
+    height: 1rem;
+  }
+}
+
+.navItem.active .inner {
+  background-color: $secondary-main;
+}
+
+.navItem.active .outer {
+  background-color: $secondary-main;
+
+  & * {
+    height: 100%;
+    width: 100%;
+    background-color: $secondary-dark;
+  }
+
+  & .outerTop {
+    border-radius: 0 0 $br-main 0;
+  }
+
+  & .outerBottom {
+    border-radius: 0 $br-main 0 0;
+  }
+}

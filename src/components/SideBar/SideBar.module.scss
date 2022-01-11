@@ -1,0 +1,14 @@
+@import "../../theme/index.scss";
+
+.sideBar {
+  width: 400px;
+  height: 100vh;
+  padding: 1rem;
+
+  position: fixed;
+  right: 0;
+  z-index: 10;
+
+  background-color: $secondary-dark;
+  border-radius: $br-main 0 0 $br-main;
+}

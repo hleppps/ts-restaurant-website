@@ -1,0 +1,15 @@
+header {
+  margin: 1rem 0;
+}
+
+.innerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchBox {
+  width: 30%;
+  min-width: 220px;
+  max-width: 400px;
+}

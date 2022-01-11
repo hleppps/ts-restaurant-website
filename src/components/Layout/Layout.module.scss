@@ -1,0 +1,15 @@
+.layout {
+  display: flex;
+  justify-content: space-between;
+
+  & .content {
+    margin-left: 5rem;
+    margin-right: 0;
+    padding: 1.5rem;
+    transition: linear 0.2s;
+  }
+  
+  & .content.showSideBar {
+    margin-right: 400px;
+  }
+}
