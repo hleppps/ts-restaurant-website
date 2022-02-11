@@ -1,21 +1,32 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Nav } from "react-bootstrap";
-import styles from "./NavBar.module.scss";
+import { NavigationPage } from "../../interfaces";
 import NavItem from "../NavItem";
-import {
-  faCog,
-  faEnvelope,
-  faHome,
-  faSignOutAlt,
-} from "@fortawesome/free-solid-svg-icons";
+import styles from "./NavBar.module.scss";
 
-const NavBar: FC = () => {
+interface NavBarProps {
+  pages: NavigationPage[];
+}
+
+const NavBar: FC<NavBarProps> = (props) => {
+  const [currentPage, setCurrentPage] = useState<string | undefined>("");
+
+  useEffect(() => {
+    const pathname = document.location.pathname.split("/")[1];
+    setCurrentPage("/" + pathname);
+  }, []);
+
   return (
     <Nav className={styles.navBar}>
-      <NavItem active={true} icon={faHome} />
-      <NavItem icon={faEnvelope} />
-      <NavItem icon={faCog} />
-      <NavItem icon={faSignOutAlt} />
+      {props.pages.map((page) => (
+        <NavItem
+          key={page.linkTo}
+          linkTo={page.linkTo}
+          icon={page.icon}
+          active={page.linkTo === currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      ))}
     </Nav>
   );
 };

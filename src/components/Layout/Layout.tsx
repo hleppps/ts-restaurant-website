@@ -1,24 +1,43 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import NavBar from "../NavBar";
 import Orders from "../Orders";
 import Payment from "../Payment";
 import PopUp from "../PopUp";
 import SideBar from "../SideBar";
 import styles from "./Layout.module.scss";
+import { NavigationPage } from "../../interfaces";
+import { useAppSelector } from "../../store/store";
 
-const Layout: FC = (props) => {
+interface LayoutProps {
+  pages: NavigationPage[];
+}
+
+const Layout: FC<LayoutProps> = (props) => {
   const [showSideBar, setShowSideBar] = useState(true);
-  const [showPopUp, setShowPopUp] = useState(true);
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [sideBarContent, setSideBarContent] = useState<any | undefined>(undefined)
 
-  const showSidebarHandler = () => {
+  const selectedMeals = useAppSelector((state) => state.meals.selectedMeals);
+
+  useEffect(()=>{
+    if (selectedMeals.length === 0) {
+      hideSideBarHandler()
+    } else {
+      setSideBarContent(<Orders />)
+      showSideBarHandler()
+    }
+  }, [selectedMeals])
+
+  const showSideBarHandler = () => {
     setShowSideBar(true);
   };
 
-  const hideSidebarHandler = () => {
+  const hideSideBarHandler = () => {
     setShowSideBar(false);
+    setShowPopUp(false);
   };
 
-  const showPopUpHandler = () => {
+  const showPopupHandler = () => {
     setShowPopUp(true);
     setShowSideBar(true);
   };
@@ -33,18 +52,14 @@ const Layout: FC = (props) => {
 
   return (
     <div className={styles.layout}>
-      <NavBar />
-      <div className={contentStyles}>
-        <button onClick={showSidebarHandler}>Show Sidebar</button>
-        <button onClick={hideSidebarHandler}>Hide Sidebar</button>
-        <button onClick={showPopUpHandler}>Show Popup</button>
+      <NavBar pages={props.pages} />
 
-        <div>{props.children}</div>
-      </div>
+      <div className={contentStyles}>{props.children}</div>
 
       {showSideBar && (
         <SideBar>
-          <Payment />
+          {/* <Payment /> */}
+          {sideBarContent}
         </SideBar>
       )}
 

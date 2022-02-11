@@ -1,14 +1,30 @@
 import { useState } from "react";
-import Header from "./components/Header";
+import { Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import Menu from "./components/Menu";
+import { PAGE_URLS } from "./constants";
+import DUMMY_PAGES from "./data/dummyPages";
+import Home from "./pages/Home";
+import Messages from "./pages/Messages";
+import Settings from "./pages/Settings";
+import { useAppSelector } from "./store/store";
 
 function App() {
-  const [selectedMeals, setSelectedMeals] = useState();
+  const pages = useState(DUMMY_PAGES)[0];
+
+  const lol = useAppSelector((state) => state.meals);
+
+  const lolHandler = () => {
+    console.log(lol);
+  };
+
   return (
-    <Layout>
-      <Header searchBox={true}>Jaegar Resto</Header>
-      <Menu />
+    <Layout pages={pages}>
+      <button onClick={lolHandler}>q</button>
+      <Routes>
+        <Route path={PAGE_URLS.home} element={<Home />} />
+        <Route path={PAGE_URLS.messages} element={<Messages />} />
+        <Route path={PAGE_URLS.settings} element={<Settings />} />
+      </Routes>
     </Layout>
   );
 }

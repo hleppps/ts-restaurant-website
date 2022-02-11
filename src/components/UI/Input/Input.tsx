@@ -6,7 +6,7 @@ import styles from "./Input.module.scss";
 
 interface InputProps {
   icon?: IconDefinition;
-  placeholder?: string;
+  placeholder?: string | number;
   disabled?: boolean;
   value?: string | number;
   label?: string;
@@ -28,7 +28,7 @@ const Input: FC<InputProps> = (props) => {
         )}
         <Form.Control
           defaultValue={inputValue}
-          placeholder={props.placeholder}
+          placeholder={props.placeholder?.toString()}
           className={styles.inputField}
           disabled={isDisabled}
         />

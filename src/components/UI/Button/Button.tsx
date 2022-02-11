@@ -4,19 +4,23 @@ import { FC } from "react";
 import styles from "./Button.module.scss";
 
 interface ButtonProps {
-  active?: boolean | undefined;
+  active?: boolean;
+  disabled?: boolean
   variant?: "primary" | "secondary" | undefined;
   icon?: IconDefinition;
+  onClick?: () => void
 }
 
 const Button: FC<ButtonProps> = (props) => {
-  const activeStyles = props.active ? styles.active : "";
+  const activeBtnStyles = props.active ? styles.active : "";
   const variantStyles =
     props.variant === "secondary" ? styles.secondary : styles.primary;
 
+  const buttonStyles = `${styles.btn} ${activeBtnStyles} ${variantStyles}`;
+
   return (
     <>
-      <button className={`${styles.btn} ${activeStyles} ${variantStyles}`}>
+      <button className={buttonStyles} onClick={props.onClick} disabled={props.disabled}>
         {props.icon && (
           <FontAwesomeIcon className={styles.icon} icon={props.icon} />
         )}

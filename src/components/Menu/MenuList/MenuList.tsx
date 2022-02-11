@@ -12,6 +12,7 @@ const MenuList: FC = () => {
       {meals.map((meal) => (
         <Col className={styles.mealsListColumn} key={meal.id}>
           <MenuItem
+            id={meal.id}
             imageUrl={meal.imageUrl}
             title={meal.title}
             price={meal.price}
